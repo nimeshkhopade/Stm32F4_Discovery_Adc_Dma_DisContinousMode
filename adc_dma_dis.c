@@ -7,6 +7,7 @@ int main(void) {
           | FLASH_ACR_PRFTEN                    // enable prefetch 
           | FLASH_ACR_ICEN                      // instruction cache enable *
           | FLASH_ACR_DCEN;                     // data cache enable 
+	
 	/*****************************************************/
 	/****   CLOCK GENERATION USING PLL AND EXT CLOCK   ***/
 	/*****************************************************/
@@ -74,6 +75,11 @@ int main(void) {
 	DMA2_Stream4->FCR |= 0 << 2 ; //| 3 << 0; // Direct mode
 	DMA2_Stream4->CR |= 1 << 0; // start stream4
 	ADC1->CR2 |= ADC_CR2_SWSTART;  //start conversion
+	/**************************************************************************/
+	/* TO GET ADC READINGS CONTINOUSLY WITHOUT SETTING THE CONT BIT IN ADC->CR2
+	REGISTER COPY AND PASTE ABOVE LINE IN WHILE LOOP BUT MAKE SURE TO KEEP 
+	DMA IN CIRCULAR MODE OTHERWISE IT WILL GIVE OVERRUN ERROR.                */
+	/**************************************************************************/
 	
 	while(1) {
 		
